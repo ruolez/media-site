@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" aria-label="Vova Media">
+  <!-- viewfinder brackets -->
+  <g class="vm-brackets" stroke="currentColor" stroke-width="4" stroke-linecap="square">
+    <path d="M10 26 V10 H26"/>
+    <path d="M74 10 H90 V26"/>
+    <path d="M90 74 V90 H74"/>
+    <path d="M26 90 H10 V74"/>
+  </g>
+  <!-- REC tally dot -->
+  <circle class="vm-rec" cx="78" cy="22" r="4" fill="#E8C547"/>
+  <!-- asymmetric V: thick left stroke (filled), thin right stroke (monoline) -->
+  <path class="vm-v-thick" d="M28 26 L44 26 L53 62 L46 74 Z" fill="currentColor"/>
+  <path class="vm-v-thin" d="M72 26 L50 74" stroke="currentColor" stroke-width="3" stroke-linecap="square"/>
+</svg>

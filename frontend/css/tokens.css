@@ -1,0 +1,26 @@
+:root {
+  /* palette — graded dark frame */
+  --black: #0a0a0a;
+  --black-2: #111113;
+  --charcoal: #1a1a1d;
+  --line: #2a2a2e;
+  --grey: #8a8a8e;
+  --white: #f2f0eb;
+  --accent: #e8c547;
+
+  /* type */
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* motion — editing, not decoration */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-reveal: 800ms;
+  --dur-hover: 220ms;
+
+  /* layout */
+  --max-w: 1440px;
+  --pad-x: clamp(1.25rem, 4vw, 4rem);
+  --pad-section: clamp(4rem, 12vh, 10rem);
+}

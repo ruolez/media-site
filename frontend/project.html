@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vova Media — Work</title>
+  <meta name="description" content="Selected work by Vova Media.">
+  <meta property="og:title" content="Vova Media — Work">
+  <meta property="og:type" content="video.other">
+  <meta property="og:image" content="/assets/og-default.jpg">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="stylesheet" href="/css/project.css">
+</head>
+<body>
+
+  <header class="nav">
+    <a class="nav-logo" href="/" aria-label="Vova Media home">
+      <span class="nav-mark" data-logo></span>
+      <span class="nav-word display">Vova&nbsp;Media</span>
+    </a>
+    <nav class="nav-links mono">
+      <a href="/#work">Work</a>
+      <a href="/#contact" class="accent">Contact</a>
+    </nav>
+  </header>
+
+  <main class="project" id="project" hidden>
+    <div class="project-video frame-169" id="project-video"></div>
+
+    <div class="project-body">
+      <div class="project-head">
+        <h1 class="display" id="p-title"></h1>
+        <p class="mono" id="p-meta"></p>
+      </div>
+
+      <div class="project-cols">
+        <div class="project-desc" id="p-desc"></div>
+        <div class="project-credits mono" id="p-credits"></div>
+      </div>
+
+      <div class="project-stills" id="p-stills"></div>
+
+      <nav class="project-nav mono">
+        <a id="p-prev" hidden>← Previous</a>
+        <a href="/#work">All work</a>
+        <a id="p-next" hidden>Next →</a>
+      </nav>
+    </div>
+  </main>
+
+  <div class="project-missing" id="not-found" hidden>
+    <p class="display">Not found</p>
+    <a class="btn" href="/">Back home</a>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/effects.js"></script>
+  <script src="/js/project.js"></script>
+</body>
+</html>

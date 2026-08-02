@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>File upload — Vova Media</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/upload.css">
+</head>
+<body>
+  <main class="up-wrap">
+    <header class="up-head">
+      <span class="nav-mark" data-logo></span>
+      <span class="up-brand display">Vova&nbsp;Media</span>
+    </header>
+
+    <section class="up-card" id="card-invalid" hidden>
+      <h1 class="display">Link unavailable</h1>
+      <p class="muted">This upload link is invalid, expired or has been revoked.
+      Please contact Vova Media for a new link.</p>
+    </section>
+
+    <section class="up-card" id="card-main" hidden>
+      <h1 class="display">Send us your files</h1>
+      <p class="up-label mono" id="up-label"></p>
+      <p class="muted">Uploads are resumable — if your connection drops, we pick up
+      where you left off. Keep this tab open until every file shows
+      <span class="accent">Complete</span>. If you reload the page, re-select the same
+      files to continue.</p>
+
+      <div class="drop" id="drop">
+        <p class="mono">Drop files here</p>
+        <p class="muted">or</p>
+        <button class="btn btn-solid" id="pick">Choose files</button>
+        <input type="file" id="file-input" multiple hidden>
+      </div>
+
+      <div class="quota mono" id="quota"></div>
+
+      <ul class="file-list" id="file-list"></ul>
+    </section>
+  </main>
+
+  <script src="/js/upload.js"></script>
+</body>
+</html>

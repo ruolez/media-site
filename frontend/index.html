@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vova Media — Video Production Agency</title>
+  <meta name="description" content="Vova Media is a media production agency crafting short films, social media video and YouTube content with a cinematic eye.">
+  <meta property="og:title" content="Vova Media — Video Production Agency">
+  <meta property="og:description" content="Short films, social media video and YouTube content with a cinematic eye.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/assets/og-default.jpg">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+
+  <header class="nav" id="top">
+    <a class="nav-logo" href="/" aria-label="Vova Media home">
+      <span class="nav-mark" data-logo></span>
+      <span class="nav-word display">Vova&nbsp;Media</span>
+    </a>
+    <nav class="nav-links mono">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="accent">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-media" id="hero-media" aria-hidden="true"></div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <h1 class="hero-title display">
+        <span class="hero-line">We craft</span>
+        <span class="hero-line"><em class="serif-accent">moving</em> images</span>
+      </h1>
+      <p class="hero-tagline" id="hero-tagline"></p>
+      <div class="hero-actions">
+        <button class="btn btn-solid" id="btn-reel" hidden>Watch reel</button>
+        <a class="btn" href="#work">Selected work</a>
+      </div>
+    </div>
+    <div class="hero-meta mono">
+      <span id="timecode">00:00:00:00</span>
+      <span>REC <span class="rec-dot" aria-hidden="true"></span></span>
+      <span>24 FPS · 4K</span>
+    </div>
+    <div class="scroll-cue mono" aria-hidden="true">Scroll</div>
+  </section>
+
+  <!-- WORK -->
+  <section class="section" id="work">
+    <div class="section-head reveal">
+      <span class="mono section-num">01</span>
+      <h2 class="display">Selected <em class="serif-accent">work</em></h2>
+    </div>
+    <div class="filters mono" id="filters"></div>
+    <div class="work-grid" id="work-grid"></div>
+    <p class="work-empty mono" id="work-empty" hidden>New work is in the edit — check back soon.</p>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="section-head reveal">
+      <span class="mono section-num">02</span>
+      <h2 class="display">What we <em class="serif-accent">do</em></h2>
+    </div>
+    <ol class="services-list" id="services-list"></ol>
+  </section>
+
+  <!-- ABOUT / MANIFESTO -->
+  <section class="section" id="about">
+    <div class="section-head reveal">
+      <span class="mono section-num">03</span>
+      <h2 class="display">The <em class="serif-accent">eye</em></h2>
+    </div>
+    <p class="manifesto reveal" id="manifesto"></p>
+  </section>
+
+  <!-- ADMIN-AUTHORED SECTIONS -->
+  <div id="blocks"></div>
+
+  <!-- CLIENTS -->
+  <section class="clients" id="clients-section" hidden>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee-track"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="section-head reveal">
+      <span class="mono section-num">04</span>
+      <h2 class="display">Let's make <em class="serif-accent">something</em></h2>
+    </div>
+    <div class="contact-grid">
+      <form id="contact-form" class="reveal" novalidate>
+        <label class="lbl" for="cf-name">Name</label>
+        <input class="field" id="cf-name" name="name" autocomplete="name" required>
+        <label class="lbl" for="cf-email">Email</label>
+        <input class="field" id="cf-email" name="email" type="email" autocomplete="email" required>
+        <label class="lbl" for="cf-company">Company <span class="opt">(optional)</span></label>
+        <input class="field" id="cf-company" name="company" autocomplete="organization">
+        <label class="lbl" for="cf-message">Tell us about the project</label>
+        <textarea class="field" id="cf-message" name="message" required></textarea>
+        <input type="text" name="website" id="cf-website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+        <button class="btn btn-solid submit-btn" type="submit">Send inquiry</button>
+      </form>
+      <aside class="contact-side reveal">
+        <p class="mono">Vova Media</p>
+        <p class="contact-note">Short films. Social. YouTube. Commercials.<br>From treatment to final grade.</p>
+        <div class="socials mono" id="socials"></div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer mono">
+    <span>© <span id="year"></span> Vova Media</span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <!-- showreel modal -->
+  <div class="modal" id="reel-modal" hidden>
+    <button class="modal-close mono" id="reel-close" aria-label="Close">Close ✕</button>
+    <div class="modal-frame frame-169" id="reel-frame"></div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/effects.js"></script>
+  <script src="/js/site.js"></script>
+</body>
+</html>
