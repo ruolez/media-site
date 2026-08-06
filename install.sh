@@ -126,10 +126,12 @@ issue_cert() { # issue_cert <domain> <email>
     # Standalone issuance; hooks stop/start the app's nginx container so
     # port 80 is free during every (re)issue and renewal. The certbot apt
     # package ships a systemd timer, so auto-renewal needs no extra setup.
+    # Hooks must start with a real executable (certbot validates the first
+    # word against PATH, so shell builtins like `cd` are rejected).
     certbot certonly --standalone --non-interactive --agree-tos $email_args \
         -d "$domain" \
-        --pre-hook  "cd $APP_DIR 2>/dev/null && $COMPOSE stop nginx || true" \
-        --post-hook "cd $APP_DIR 2>/dev/null && $COMPOSE start nginx || true" \
+        --pre-hook  "$COMPOSE -f $APP_DIR/docker-compose.yml stop nginx || true" \
+        --post-hook "$COMPOSE -f $APP_DIR/docker-compose.yml start nginx || true" \
         || die "Certificate issuance failed. Check DNS and that port 80 is reachable from the internet."
     say "Certificate issued. Auto-renewal is handled by certbot.timer:"
     systemctl list-timers certbot.timer --no-pager 2>/dev/null | head -3 || true
