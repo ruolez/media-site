@@ -100,6 +100,20 @@
 .f-status.done { color: var(--accent); }
 .f-status.err { color: #e57373; }
 
+.f-dl {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.f-dl:hover {
+  text-decoration: underline;
+}
+
 .f-bar {
   margin-top: 0.7rem;
   height: 4px;

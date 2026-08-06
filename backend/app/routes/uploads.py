@@ -1,13 +1,17 @@
 import hashlib
 import os
+import re
 import shutil
 import uuid
+from urllib.parse import quote
 
-from flask import Blueprint, request
+from flask import Blueprint, Response, request
 
 from .. import config, db, utils
 
 bp = Blueprint("uploads", __name__, url_prefix="/api/upload")
+
+STORAGE_NAME_RE = re.compile(r"^[0-9a-f]{32}$")
 
 
 class UploadError(Exception):
@@ -55,6 +59,30 @@ def get_session(token):
         "bytes_used": sum(f["bytes_received"] for f in files),
         "files": files,
     }
+
+
+@bp.get("/<token>/files/<int:file_id>/download")
+def download_file(token, file_id):
+    with db.get_conn() as conn:
+        link = _resolve_link(conn, token)
+        row = conn.execute(
+            """SELECT client_name, storage_name FROM upload_files
+               WHERE id = %s AND link_id = %s AND status = 'complete'""",
+            (file_id, link["id"]),
+        ).fetchone()
+    if not row or not STORAGE_NAME_RE.match(row["storage_name"]):
+        raise UploadError("not found", 404)
+
+    safe_name = row["client_name"].replace("\r", "").replace("\n", "").replace('"', "")
+    ascii_fallback = safe_name.encode("ascii", "replace").decode() or "download"
+    resp = Response("")
+    resp.headers["X-Accel-Redirect"] = f"/protected-files/{row['storage_name']}"
+    resp.headers["Content-Type"] = "application/octet-stream"
+    resp.headers["Content-Disposition"] = (
+        f'attachment; filename="{ascii_fallback}"; '
+        f"filename*=UTF-8''{quote(safe_name)}"
+    )
+    return resp
 
 
 @bp.post("/<token>/files")

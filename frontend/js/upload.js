@@ -69,6 +69,14 @@ function fileRow(name, size) {
       fill.style.width = total ? `${(done / total) * 100}%` : "0%";
       sub.textContent = `${fmtBytes(done)} / ${fmtBytes(total)}`;
     },
+    download(fileId) {
+      if (row.querySelector(".f-dl")) return;
+      const a = document.createElement("a");
+      a.className = "f-dl";
+      a.href = `${API}/files/${fileId}/download`;
+      a.textContent = "Download";
+      row.appendChild(a);
+    },
   };
 }
 
@@ -79,12 +87,18 @@ function renderQuota() {
     ` · expires ${new Date(session.expires_at).toLocaleDateString()}`;
 }
 
-function renderPendingResumes() {
-  const pending = session.files.filter((f) => f.status === "uploading" && f.bytes_received > 0);
-  pending.forEach((f) => {
-    const ui = fileRow(f.client_name, f.total_bytes);
-    ui.progress(f.bytes_received, f.total_bytes);
-    ui.status("Interrupted — re-select this file to resume");
+function renderExistingFiles() {
+  session.files.forEach((f) => {
+    if (f.status === "complete") {
+      const ui = fileRow(f.client_name, f.total_bytes);
+      ui.progress(f.total_bytes, f.total_bytes);
+      ui.status("Complete ✓", "done");
+      ui.download(f.id);
+    } else if (f.bytes_received > 0) {
+      const ui = fileRow(f.client_name, f.total_bytes);
+      ui.progress(f.bytes_received, f.total_bytes);
+      ui.status("Interrupted — re-select this file to resume");
+    }
   });
 }
 
@@ -164,6 +178,7 @@ async function uploadFile(file) {
     if (reg.status === "complete") {
       ui.progress(file.size, file.size);
       ui.status("Complete ✓", "done");
+      ui.download(reg.file_id);
       return;
     }
 
@@ -218,6 +233,7 @@ async function uploadFile(file) {
     }
 
     ui.status("Complete ✓", "done");
+    ui.download(reg.file_id);
     session.bytes_used += file.size;
     renderQuota();
   } finally {
@@ -293,6 +309,6 @@ function initIntake() {
   $("card-main").hidden = false;
   $("up-label").textContent = session.label;
   renderQuota();
-  renderPendingResumes();
+  renderExistingFiles();
   initIntake();
 })();
